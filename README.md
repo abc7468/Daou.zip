@@ -8,7 +8,7 @@
 
 |개월|주제|
 |:---:|:---:|
-|1|Clean Architecture|
+|1|KMM (Kotlin Multiplatform Mobile)|
 |2|뿌슝빠슝|
 |3||
 |4||
