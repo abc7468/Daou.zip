@@ -27,7 +27,7 @@ spring.security.user.password={password}
 
 # Form Login 인증
 
-```
+``` java
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -77,6 +77,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 [인증 성공 시, 이동 참고](https://twer.tistory.com/entry/Spring-Security-defaultSuccessUrl-successForwardUrl-successHandler)
 
+</br></br></br>
 # UsernamePasswordAuthenticationFilter 동작 방식
 
 <img src="https://user-images.githubusercontent.com/60870438/224763404-8e9a9e7f-3731-4493-83d8-8df95e9747c7.png" width="70%" >
@@ -91,6 +92,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 <img src="https://user-images.githubusercontent.com/60870438/224770175-7b510257-22de-41f4-aceb-e7dc026eae78.png" >
 
+</br></br></br>
 # Logout
 
 <img src="https://user-images.githubusercontent.com/60870438/225357702-c6e3d644-bb2b-4cc8-87b8-6ae35351c6ce.png" width="70%" >
@@ -101,6 +103,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 <img src="https://user-images.githubusercontent.com/60870438/225363803-dbce701f-f0fd-4269-98e7-124f0d79ee08.png" >
 
+</br></br></br>
 # Remember Me
 
 1. 세션이 만료되고 웹 브라우저가 종료된 후에도 애플리케이션이 사용자의 계정을 기억하는 기능
@@ -125,6 +128,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 - 세션 ID가 없어도 remember-me 쿠키로 인증 가능
 
+</br></br></br>
 # RememberMeAuthenticationFilter
 
 - 실행 조건
@@ -140,4 +144,99 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             - Token..: 메모리 vs 요청 토큰 / 약 14일 유지
             - Persist..: DB vs 요청 토큰 / 영구적
 
+### remember-me cookie 인증 과정
 
+<img src="https://user-images.githubusercontent.com/60870438/225375596-4eb7a7dc-567e-4925-9c51-8a13665e841b.png">
+
+</br></br></br>
+# 익명 사용자 (AnonymousAuthenticatioFilter)
+
+- 익명과 인증 사용자 구분을 위해 사용
+- 인증 객체를 세션에 저장하지 않는다. 하지만 SecurityContext에 익명 인증 객체를 생성하긴 한다.
+
+</br></br></br>
+# 세션 제어
+
+## 동시 세션 제어 
+
+<img src="https://user-images.githubusercontent.com/60870438/225377211-126dda94-7685-4662-9c9b-df643905167c.png" width="70%">
+
+1. 이전 사용자의 세션 만료
+2. 현재 사용자의 인증 실패
+
+<img src="https://user-images.githubusercontent.com/60870438/225376264-8bc4fdb6-a0e2-40e5-a110-7404e5a2eb9e.png" width="70%">
+
+## 세션 고정 보호
+
+<img src="https://user-images.githubusercontent.com/60870438/225377357-b6b3c190-2057-4389-ba3b-b506e80205b6.png" width="70%">
+
+- 같은 쿠키를 공유하면서 생기는 문제
+- 세션값으로 인증받은 객체를 사용할 수 있기 때문이다. 이를 방지하기 위해 spring security가 제공하는 기능
+- 인증할 때마다 새로운 세션, 쿠키를 생성한다.
+
+<img src="https://user-images.githubusercontent.com/60870438/225377732-c053977f-a5d8-4c04-9e45-a36f812cd77e.png" width="70%">
+
+- changeSessionId()
+            - default: 세션 유지, 아이디 생성
+            - none: 세션 고정
+            - migrateSession: 세션, 아이디 생성 3.1이하 (세션 설정 유지)
+            - newSession: 세션, 아이디 새로 생성
+
+
+## 세션 정책
+
+<img src="https://user-images.githubusercontent.com/60870438/225378734-40088c56-66c1-4e88-9ef6-67959b689e73.png" width="70%">
+
+</br></br></br>
+# 세션 제어 필터
+
+## `SessionManagementFilter`
+1. 세션 관리: 인증 시, 세션정보 등록,조회,삭제 등 이력 관리
+2. 동시 세션 제어: 동일 계정, 최대 접근 세션 수 제한
+3. 세션 고정 보호: 인증시마다 세션 쿠키 새로 발급해 쿠키 조작 방지
+4. 세션 생성 정책
+
+## `ConcurrentSessionFilter`
+- 매 요청마다 현재 사용자의 세션 만료 여부 체크
+- 즉시 만료 처리 -> 로그아웃 -> 즉시 오류 페이지 응답
+
+- 두 필터 모두, 동시 세션 제어를 위해 연계되어 사용된다.
+
+</br>
+<img src="https://user-images.githubusercontent.com/60870438/225380431-a34c795a-5790-487d-a993-9a65745d1e31.png" width="70%">
+
+- 최대 세션 접근 개수 초과시, 발생하는 과정
+
+<img src="https://user-images.githubusercontent.com/60870438/225380731-aa638d6b-e8ff-404c-aff9-1ca53e880d07.png" >
+
+</br></br></br>
+# 권한 설정과 표현식
+
+## 권한 설정
+
+1. 선언적 방식
+- url
+`http.antMatchers(”*/users/**”).hasRole(”USER”)`
+- method
+```java
+@PreAuthorize(”hasRole(’USER’)”)
+public void user() { System.out.println(”user”) };c void user() { System.out.println(”user”) };
+```
+
+2. 동적 방식 - DB 연동 프로그래밍
+- url
+- method
+
+<img src="https://user-images.githubusercontent.com/60870438/225381925-f0e3b770-aa2e-4e7d-a0c9-4f94b036e6db.png" width="70%">
+- /shop/**: 해당 경로로 접근할 때만, 보안 검증이 이루어진다.
+- `antMatchers(url).{권한 정보}`
+- .access를 사용하면 spEL 문법을 활용할 수 있다.
+- 좁고 구체적인 범위부터 확장해나간다.
+
+## 표현식
+
+<img src="https://user-images.githubusercontent.com/60870438/225382592-c283252d-ee1a-4b7c-aceb-f055b58744c3.png" width="70%">
+
+- anonymous()에는 user가 접근 가능하다? NO
+- hasRole에는 "ROLE_" 접두사가 붙으면 안된다.
+- hasAuthority에는 "ROLE_" 접두사가 붙어야한다.
