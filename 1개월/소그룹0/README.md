@@ -1,4 +1,4 @@
-# Daou.zip 소그룹0
+# Daou.zip - 소그룹0
 
 ### 학습목표
 > KMM(Kotlin Multiplatform Mobile)를 학습하여 프로젝트를 설계하고 관련 라이브러리의 동작을 파악하고 활용한다.
