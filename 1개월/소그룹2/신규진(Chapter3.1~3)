@@ -24,6 +24,7 @@
 하지만, 함수형 인터페이스가 아닌 인터페이스나 클래스를 인수로 받는 메서드에서도 람다 표현식을 사용할 수 있습니다. 이 경우 람다 표현식이 인터페이스나 클래스의 메서드와 시그니처가 일치해야 합니다.
 따라서, 함수형 인터페이스를 인수로 받는 메서드에서는 람다 표현식을 사용하여 함수를 전달하는 것이 가장 일반적이지만, 다른 인터페이스나 클래스에서도 람다 표현식을 사용할 수 있습니다.
 
+```java
 ### @FunctionalInterface
 
 @FunctionalInterface
@@ -33,6 +34,7 @@ int operation(int a, int b);
 
 MyFunctionalInterface add = (a, b) -> a + b;
 MyFunctionalInterface subtract = (a, b) -> a - b;
+```
 
 System.out.println(add.operation(1, 2)); // 3
 System.out.println(subtract.operation(5, 3)); // 2
