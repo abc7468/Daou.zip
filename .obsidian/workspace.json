@@ -56,6 +56,18 @@
             }
           },
           {
+            "id": "6648a2e76a18f015",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "1개월/소그룹1/5. 반복문을 단순하게 만들어라_조가예.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
             "id": "c6b33b937a06f176",
             "type": "leaf",
             "state": {
@@ -68,7 +80,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -134,7 +146,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "1개월/소그룹1/4. 조건문을 깔끔하게 작성하라_조가예.md",
+                "file": "1개월/소그룹1/5. 반복문을 단순하게 만들어라_조가예.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -151,7 +163,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "1개월/소그룹1/4. 조건문을 깔끔하게 작성하라_조가예.md",
+                "file": "1개월/소그룹1/5. 반복문을 단순하게 만들어라_조가예.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -174,7 +186,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "1개월/소그룹1/4. 조건문을 깔끔하게 작성하라_조가예.md"
+                "file": "1개월/소그룹1/5. 반복문을 단순하게 만들어라_조가예.md"
               }
             }
           }
@@ -195,10 +207,10 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "87ad6b336c2e1717",
+  "active": "6648a2e76a18f015",
   "lastOpenFiles": [
-    "1개월/소그룹1/1. 변수 할당으로 의도를 표현하라_조가예.md",
     "1개월/소그룹1/4. 조건문을 깔끔하게 작성하라_조가예.md",
+    "1개월/소그룹1/1. 변수 할당으로 의도를 표현하라_조가예.md",
     "1개월/소그룹1/2. 배열로 데이터 컬렉션을 관리하라_조가예.md",
     "README.md",
     "1개월/소그룹1/README.md"
