@@ -34,10 +34,10 @@ int operation(int a, int b);
 
 MyFunctionalInterface add = (a, b) -> a + b;
 MyFunctionalInterface subtract = (a, b) -> a - b;
-```
 
 System.out.println(add.operation(1, 2)); // 3
 System.out.println(subtract.operation(5, 3)); // 2
+```
 이런식으로 구현 가능 
 
 
