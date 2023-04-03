@@ -512,3 +512,113 @@ public class FormAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuc
 ---
 
 # # 10. 인증 실패 핸들러 - CustomAuthenticationFailureHandler
+
+- AuthenticationProvider, UserDetailsService 등에서 인증에 실패했을 경우, onAuthenticationFailure가 실행된다.
+- 클라이언트에게 오류 보여주기
+
+### CustomAuthenticationFailureHandler
+
+```java
+public class CustomAuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
+
+    @Override
+    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
+        String errorMessage = "Invalid Username or Password";
+
+        if (exception instanceof BadCredentialsException){
+            errorMessage = "Invalid Username or Password";
+        }else if (exception instanceof InsufficientAuthenticationException){
+            errorMessage = "Invalid Secret Key";
+        }
+
+        setDefaultFailureUrl("/login?error=true&exception="+exception.getMessage());
+
+        super.onAuthenticationFailure(request, response, exception);
+    }
+}
+
+```
+
+### InsufficientAuthenticationException?
+
+```java
+public class InsufficientAuthenticationException extends AuthenticationException {
+    public InsufficientAuthenticationException(String msg) {
+        super(msg);
+    }
+
+    public InsufficientAuthenticationException(String msg, Throwable t) {
+        super(msg, t);
+    }
+}
+```
+
+- AuthenticationException을 상속받은 객체
+- **우리 코드에 적용 가능하다.**
+
+### FormAuthenticationProvider
+
+- 예외가 넘어오는 곳
+
+```java
+@Override
+    @Transactional
+    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+        // 검증을 위한
+        String loginId = authentication.getName();
+        String password = (String) authentication.getCredentials();
+
+        // 추가 검증을 위해 UserDetails를 반환한다.
+         AccountContext accountContext = (AccountContext)userDetailsService.loadUserByUsername(loginId);
+
+        if (!passwordEncoder.matches(password, accountContext.getPassword())) {
+            throw new BadCredentialsException("Invalid password");
+        }
+
+        String secretKey = ((FormWebAuthenticationDetails) authentication.getDetails()).getSecretKey();
+        if (secretKey == null || !"secret".equals(secretKey)) {
+            throw new InsufficientAuthenticationException("Invalid Secret");
+        }
+
+        return new UsernamePasswordAuthenticationToken(accountContext.getAccount(), null, accountContext.getAuthorities());
+    }
+```
+
+### LoginController
+
+```java
+@RequestMapping(value="/login")
+	public String login(@RequestParam(value = "error", required = false) String error,
+						@RequestParam(value = "exception", required = false) String exception, Model model){
+		model.addAttribute("error",error);
+		model.addAttribute("exception",exception);
+		return "login";
+	}
+```
+
+### SecurityConfig
+
+```java
+@Override
+    protected void configure(final HttpSecurity http) throws Exception {
+        http
+                .authorizeRequests()
+                // 권한 부여
+								// 경로에 접근이 가능하도록 한다.
+								.antMatchers("/", "/users", "/user/login/**", "/login*").permitAll()
+                .antMatchers("/mypage").hasRole("USER")
+                .antMatchers("/messages").hasRole("MANAGER")
+                .antMatchers("/config").hasRole("ADMIN")
+                .antMatchers("/**").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .formLogin()
+                .loginPage("/login")
+                .loginProcessingUrl("/login_proc")
+                .authenticationDetailsSource(formWebAuthenticationDetailsSource)
+                .defaultSuccessUrl("/")
+                .successHandler(customAuthenticationSuccessHandler)
+                .failureHandler(customAuthenticationFailureHandler)
+                .permitAll();
+}
+```
