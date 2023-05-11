@@ -17,7 +17,7 @@
 |개월|주제|
 |:---:|:---:|
 |1|KMM (Kotlin Multiplatform Mobile)|
-|2|뿌슝빠슝|
+|2|KMM과 Compose Multiplatform|
 |3||
 |4||
 |5||
