@@ -1,7 +1,7 @@
 ### 👓 금주 학습 자료
 ---
-- 교육 내용 링크: [링크](https://blockjjam99.notion.site/Microservice-Spring-Cloud-40581b3ce9dc4e97aec913602a17edb7?pvs=4) 
-- (전체 자료 링크: [링크](https://blockjjam99.notion.site/Spring-Cloud-1800e239d9fc4b27b17b6facaf71e271?pvs=4))
+- 교육 내용 링크: [링크](https://blockjjam99.notion.site/Service-Discovery-439279088d0f4603b576c4bb5b76279a?pvs=4) 
+- (전체 자료 링크: [링크](https://blockjjam99.notion.site/0cf3fbb1e3ce47d2909c47c5053d66a5?v=14a0ba3767424b7892f9650ccd37e1c2&pvs=4))
 
 ### 🌕 강의/도서 소스
 ---
