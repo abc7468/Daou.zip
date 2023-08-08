@@ -1,6 +1,6 @@
 ### 👓 금주 학습 자료
 ---
-- 교육 내용 링크: [E-commerce개요_링크](https://blockjjam99.notion.site/E-Commerce-fa6312d5f1724fb7931321ca9c2f45d1?pvs=4), [User_Microservice_1_링크](https://blockjjam99.notion.site/Users-Microservice-1-1a36630a4c9741789199d2242191b80a?pvs=4) 
+- 교육 내용 링크: [Catalogs And Orders Service 정리 링크](https://blockjjam99.notion.site/Catalogs-and-Orders-Microservice-a2a06c823b7e423496921527e4075c7c?pvs=4), [User Microservice 2 링크](https://blockjjam99.notion.site/Users-Microservice-2-a06ff08e9af54c50a59b5e3e667b7621?pvs=4) 
 - (전체 자료 링크: [링크](https://blockjjam99.notion.site/0cf3fbb1e3ce47d2909c47c5053d66a5?v=14a0ba3767424b7892f9650ccd37e1c2&pvs=4))
 
 ### 🌕 강의/도서 소스
