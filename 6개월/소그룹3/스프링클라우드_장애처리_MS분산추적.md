@@ -1,6 +1,6 @@
 ### 👓 금주 학습 자료
 ---
-- 교육 내용 링크: [Spring Cloud Bus 정리 링크](https://blockjjam99.notion.site/Spring-Cloud-Bus-2678d70a92c0420782cb27a5ae79886c?pvs=4)
+- 교육 내용 링크: [Spring Cloud 장애처리의 MS 분산추적 정리 링크](https://blockjjam99.notion.site/Microservice-449bc148956f404a87f4005c1a421d80?pvs=4)
 - (전체 자료 링크: [링크](https://blockjjam99.notion.site/0cf3fbb1e3ce47d2909c47c5053d66a5?v=14a0ba3767424b7892f9650ccd37e1c2&pvs=4))
 
 ### 🌕 강의/도서 소스
